@@ -1,7 +1,7 @@
 package com.efrei.demospring.oldway.repo;
 
 import com.efrei.demospring.entity.Personne;
-import com.efrei.demospring.oldway.PersonneOldRowMapper;
+import com.efrei.demospring.oldway.mapper.PersonneOldRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
@@ -13,63 +13,57 @@ import java.util.List;
 @Repository
 public class PersonneOldRepo {
 
-    private static final String insertPerson = "INSERT INTO personne (nom,genre,age) VALUES (?, ?, ?)" ;
+    private static final String insertPerson = "INSERT INTO PERSONNE (nom,genre,age) VALUES (?, ?, ?)" ;
 
-    private static final String findPersonByName = "SELECT * FROM personneOld WHERE nom = ? ORDER BY age DESC";
+    private static final String findPersonByName = "SELECT * FROM PERSONNE WHERE nom = ? ORDER BY age DESC";
 
-    private static final String findPersonbyID = "SELECT * FROM personne WHERE id = ?";
+    private static final String findPersonbyID = "SELECT * FROM PERSONNE WHERE id = ?";
 
-    private static final String findPersonByAgeRange = "SELECT * FROM personneOld WHERE age <= ? AND age >= ?";
+    private static final String findPersonByAgeRange = "SELECT * FROM PERSONNE WHERE age <= ? AND age >= ?";
 
     @Autowired
     private JdbcClient jdbcClient;
 
 
-    public Personne createPersonne(Personne personneOld) {
+    public Personne createPersonne(Personne personneOld) throws SQLException {
         Connection conn = null;
         PreparedStatement pstmt = null;
 
-        try {
-            conn = DatabaseUtil.getDatabaseConnection();
+        conn = DatabaseUtil.getDatabaseConnection();
 
-            pstmt = conn.prepareStatement(insertPerson, Statement.RETURN_GENERATED_KEYS);
+        pstmt = conn.prepareStatement(insertPerson, Statement.RETURN_GENERATED_KEYS);
 
-            // Set parameters for pstmt based on PersonneOld properties
-            // pstmt.setString(1, personneOld.getProperty());
+        // Set parameters for pstmt based on PersonneOld properties
+        pstmt.setString(1, personneOld.getNom());
+        pstmt.setString(2, personneOld.getGenre().toString());
+        pstmt.setInt(3, personneOld.getAge());
 
-            int affectedRows = pstmt.executeUpdate();
+        int affectedRows = pstmt.executeUpdate();
 
-            if (affectedRows == 0) {
-                throw new SQLException("Creating person failed, no rows affected.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (affectedRows == 0) {
+            throw new SQLException("Creating person failed, no rows affected.");
         }
 
         return personneOld;
     }
 
-    public Personne getPersonneByID(Long id) {
+    public Personne getPersonneByID(Long id) throws SQLException {
         Personne personneOld = null;
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        try {
-            conn = DatabaseUtil.getDatabaseConnection();
 
-            pstmt = conn.prepareStatement(findPersonbyID);
-            pstmt.setLong(1, id);
+        conn = DatabaseUtil.getDatabaseConnection();
 
-            rs = pstmt.executeQuery();
+        pstmt = conn.prepareStatement(findPersonbyID);
+        pstmt.setLong(1, id);
 
-            if (rs.next()) {
-                // Map ResultSet to PersonneOld, assuming you have a constructor or setters to set properties
-                personneOld = new Personne(/* Map properties from ResultSet */);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        rs = pstmt.executeQuery();
+
+        PersonneOldRowMapper mapper = new PersonneOldRowMapper();
+        rs.next();
+        personneOld = mapper.mapRow(rs, 0);
 
         return personneOld;
     }

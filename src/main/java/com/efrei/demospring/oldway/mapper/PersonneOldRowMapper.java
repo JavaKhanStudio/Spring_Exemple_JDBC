@@ -1,4 +1,4 @@
-package com.efrei.demospring.oldway;
+package com.efrei.demospring.oldway.mapper;
 
 import com.efrei.demospring.entity.Personne;
 import com.efrei.demospring.enums.GenreEnum;

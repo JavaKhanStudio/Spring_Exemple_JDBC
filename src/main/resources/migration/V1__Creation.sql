@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS MAISON (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nomRue VARCHAR(255),
+    numRue INT
+);
+
+CREATE TABLE IF NOT EXISTS PERSONNE (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(255),
+    genre VARCHAR(255),
+    age INT,
+    maison_id INT,
+    FOREIGN KEY (maison_id) REFERENCES Maison(id)
+);

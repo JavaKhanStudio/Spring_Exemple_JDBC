@@ -13,8 +13,8 @@ import java.util.List;
 public class Maison {
 
     int id ;
-    String numRue ;
-    String nomProprio ;
+    String nomRue ;
+    int numRue ;
 
     List<Personne> occupants ;
 

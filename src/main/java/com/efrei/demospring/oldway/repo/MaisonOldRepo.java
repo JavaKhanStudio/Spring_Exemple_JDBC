@@ -1,6 +1,8 @@
 package com.efrei.demospring.oldway.repo;
 
 import com.efrei.demospring.entity.Maison;
+import com.efrei.demospring.oldway.mapper.MaisonOldRowMapper;
+import com.efrei.demospring.oldway.mapper.PersonneOldRowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -8,18 +10,19 @@ import java.sql.*;
 @Repository
 public class MaisonOldRepo {
 
+    String insertMaison = "INSERT INTO maisonOld (nomRue, numRue) VALUES (?, ?)";
+
     public Maison createHouse(Maison maisonOld) {
         Connection conn = null;
         PreparedStatement pstmt = null;
 
         try {
-            conn = DatabaseUtil.getDatabaseConnection(); // You need to implement this method to get a connection
+            conn = DatabaseUtil.getDatabaseConnection();
 
-            String sql = "INSERT INTO maisonOld (numRue, nomProprio) VALUES (?, ?)";
-            pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pstmt = conn.prepareStatement(insertMaison, Statement.RETURN_GENERATED_KEYS);
 
-            pstmt.setString(1, maisonOld.getNumRue());
-            pstmt.setString(2, maisonOld.getNomProprio());
+            pstmt.setString(1, maisonOld.getNomRue());
+            pstmt.setInt(2, maisonOld.getNumRue());
 
             int affectedRows = pstmt.executeUpdate();
 
@@ -48,11 +51,9 @@ public class MaisonOldRepo {
             pstmt.setLong(1, id);
 
             rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                // Map ResultSet to MaisonOld, assuming you have a constructor or setters to set properties
-                maisonOld = new Maison(/* Map properties from ResultSet */);
-            }
+            MaisonOldRowMapper mapper = new MaisonOldRowMapper();
+            rs.next();
+            maisonOld = mapper.mapRow(rs, 0);
         } catch (SQLException e) {
             e.printStackTrace();
         }

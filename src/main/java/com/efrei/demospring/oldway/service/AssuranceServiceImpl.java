@@ -7,6 +7,8 @@ import com.efrei.demospring.oldway.repo.PersonneOldRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
+
 @Service
 public class AssuranceServiceImpl implements AssuranceService{
 
@@ -28,12 +30,12 @@ public class AssuranceServiceImpl implements AssuranceService{
     }
 
     @Override
-    public Personne createPersonne(Personne personneOld) {
+    public Personne createPersonne(Personne personneOld) throws SQLException {
         return personneOldRepo.createPersonne(personneOld);
     }
 
     @Override
-    public Personne getPersonneByID(Long id) {
+    public Personne getPersonneByID(Long id) throws SQLException {
         return personneOldRepo.getPersonneByID(id);
     }
 }

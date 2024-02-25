@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class DatabaseUtil {
 
-    private static final String URL = "jdbc:h2:mem:testdb";
-    private static final String USER = "root";
+    private static final String URL = "jdbc:h2:mem:public";
+    private static final String USER = "sa";
     private static final String PASSWORD = "password";
 
     public static Connection getDatabaseConnection() throws SQLException {
