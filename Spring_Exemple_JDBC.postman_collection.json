@@ -7,7 +7,61 @@
 	},
 	"item": [
 		{
-			"name": "Add Personne",
+			"name": "OLD Add Maison",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nomRue\" : \"Rue du bonjour\",\r\n    \"numRue\" : 201,\r\n    \"genre\" : \"HOMME\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/maison/old",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"maison",
+						"old"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NEW Add Maison",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nomRue\" : \"Rue du bonjour\",\r\n    \"numRue\" : 201,\r\n    \"genre\" : \"HOMME\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/maison/new",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"maison",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OLD Add Personne",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -21,11 +75,10 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/personne/old",
+					"raw": "{{host}}/personne/old",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8080",
 					"path": [
 						"personne",
 						"old"
@@ -35,16 +88,121 @@
 			"response": []
 		},
 		{
-			"name": "Get Personne",
+			"name": "NEW Add Personne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nom\" : \"Simon\",\r\n    \"genre\" : \"HOMME\",\r\n    \"age\" : 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/personne/new",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"personne",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OLD Add person to maison",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/maison/old/1/2",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"maison",
+						"old",
+						"1",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NEW Add person to maison",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/maison/new/1/2",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"maison",
+						"new",
+						"1",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OLD Get Maison",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/personne/old/1",
+					"raw": "localhost:8080/maison/old/1",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
+					"path": [
+						"maison",
+						"old",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NEW Get Maison",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/maison/new/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"maison",
+						"new",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OLD Get Personne",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/personne/old/1",
+					"host": [
+						"{{host}}"
+					],
 					"path": [
 						"personne",
 						"old",
@@ -55,18 +213,19 @@
 			"response": []
 		},
 		{
-			"name": "Add Maison",
+			"name": "NEW Get Personne",
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/maison",
+					"raw": "{{host}}/personne/new/1",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "8080",
 					"path": [
-						"maison"
+						"personne",
+						"new",
+						"1"
 					]
 				}
 			},
