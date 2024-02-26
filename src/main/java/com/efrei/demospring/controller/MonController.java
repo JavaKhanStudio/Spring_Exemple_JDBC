@@ -12,7 +12,7 @@ public class MonController {
 
     @GetMapping(path = "/bonjour")
     public Maison getRessource() {
-        return Maison.builder().nomProprio("Robert").numRue("2023 rue du Bonjour").build();
+        return Maison.builder().nomRue("Rue du Bonjour").numRue(2023).build();
     }
 
 

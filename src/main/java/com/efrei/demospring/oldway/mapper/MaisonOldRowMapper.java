@@ -14,8 +14,8 @@ public class MaisonOldRowMapper implements RowMapper<Maison> {
     public Maison mapRow(ResultSet rs, int rowNum) throws SQLException {
         Maison maison = new Maison() ;
         maison.setId(rs.getInt("id"));
-        maison.setNomProprio(rs.getString("nomProprio"));
-        maison.setNumRue(rs.getString("numRue"));
+        maison.setNomRue(rs.getString("nomRue"));
+        maison.setNumRue(rs.getInt("numRue"));
 
         return maison ;
     }

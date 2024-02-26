@@ -2,18 +2,17 @@ package com.efrei.demospring.oldway.service;
 
 import com.efrei.demospring.entity.Maison;
 import com.efrei.demospring.entity.Personne;
-import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 
 
-public interface AssuranceService {
+public interface AssuranceServiceOld {
 
     Maison createHouse(Maison MaisonOld) ;
-    Maison getHouseById(Long id) ;
+    Maison getHouseById(int id) ;
 
-    Personne addPersonToHouse(Long maisonID, Long personneID) throws SQLException ;
+    Personne addPersonToHouse(int maisonID, int personneID) throws SQLException ;
 
     Personne createPersonne(Personne MaisonOld) throws SQLException;
-    Personne getPersonneByID(Long id) throws SQLException;
+    Personne getPersonneByID(int id) throws SQLException;
 }

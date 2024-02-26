@@ -16,6 +16,7 @@ public class PersonneOldRowMapper implements RowMapper<Personne> {
         personne.setNom(rs.getString("nom"));
         personne.setGenre(GenreEnum.valueOf(rs.getString("genre")));
         personne.setAge(rs.getInt("age"));
+        personne.setMaisonId(rs.getInt("maison_id"));
         return personne;
     }
 }

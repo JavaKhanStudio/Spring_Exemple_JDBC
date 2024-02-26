@@ -16,4 +16,5 @@ public class Personne {
     String nom ;
     GenreEnum genre ;
     int age ;
+    int maisonId;
 }

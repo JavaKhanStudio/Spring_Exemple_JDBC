@@ -10,13 +10,12 @@ import org.springframework.stereotype.Service;
 import java.sql.SQLException;
 
 @Service
-public class AssuranceServiceImpl implements AssuranceService{
+public class AssuranceServiceOldImpl implements AssuranceServiceOld {
 
     @Autowired
     PersonneOldRepo personneOldRepo ;
 
     @Autowired
-
     MaisonOldRepo maisonOldRepo;
 
     @Override
@@ -25,8 +24,24 @@ public class AssuranceServiceImpl implements AssuranceService{
     }
 
     @Override
-    public Maison getHouseById(Long id) {
+    public Maison getHouseById(int id) {
         return maisonOldRepo.getHouseById(id);
+    }
+
+    @Override
+    public Personne addPersonToHouse(int maisonID, int personneID) throws SQLException {
+
+        Personne personne = getPersonneByID(personneID) ;
+
+        if(personne == null) throw new SQLException("Personne not found") ;
+
+        Maison maison = getHouseById(maisonID) ;
+
+        if(maison == null) throw new SQLException("Maison not found") ;
+
+        personne.setMaisonId(maisonID);
+
+        return null;
     }
 
     @Override
@@ -35,7 +50,7 @@ public class AssuranceServiceImpl implements AssuranceService{
     }
 
     @Override
-    public Personne getPersonneByID(Long id) throws SQLException {
+    public Personne getPersonneByID(int id) throws SQLException {
         return personneOldRepo.getPersonneByID(id);
     }
 }

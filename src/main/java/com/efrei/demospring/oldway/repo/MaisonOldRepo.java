@@ -37,7 +37,7 @@ public class MaisonOldRepo {
         return maisonOld;
     }
 
-    public Maison getHouseById(Long id) {
+    public Maison getHouseById(int id) {
         Maison maisonOld = null;
         Connection conn = null;
         PreparedStatement pstmt = null;

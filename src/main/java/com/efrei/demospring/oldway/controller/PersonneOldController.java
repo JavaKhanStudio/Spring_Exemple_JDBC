@@ -1,7 +1,7 @@
 package com.efrei.demospring.oldway.controller;
 
 import com.efrei.demospring.entity.Personne;
-import com.efrei.demospring.oldway.service.AssuranceService;
+import com.efrei.demospring.oldway.service.AssuranceServiceOld;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 public class PersonneOldController {
 
     @Autowired
-    AssuranceService assuranceService ;
+    AssuranceServiceOld assuranceServiceOld;
 
     @PostMapping
     public ResponseEntity addPersonne(@RequestBody Personne personne){
         try {
-            assuranceService.createPersonne(personne) ;
+            assuranceServiceOld.createPersonne(personne) ;
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (Exception e) {
             ErrorResponse errorResponse = new ErrorResponseException(HttpStatus.BAD_REQUEST, e);
@@ -28,9 +28,9 @@ public class PersonneOldController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Personne> getPersonne(@PathVariable long id) {
+    public ResponseEntity<Personne> getPersonne(@PathVariable int id) {
         try {
-            Personne personne = assuranceService.getPersonneByID(id) ;
+            Personne personne = assuranceServiceOld.getPersonneByID(id) ;
             if(personne != null) {
                 return ResponseEntity.ok(personne);
             } else {

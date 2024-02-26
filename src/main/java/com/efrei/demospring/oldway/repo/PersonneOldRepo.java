@@ -47,7 +47,7 @@ public class PersonneOldRepo {
         return personneOld;
     }
 
-    public Personne getPersonneByID(Long id) throws SQLException {
+    public Personne getPersonneByID(int id) throws SQLException {
         Personne personneOld = null;
         Connection conn = null;
         PreparedStatement pstmt = null;
