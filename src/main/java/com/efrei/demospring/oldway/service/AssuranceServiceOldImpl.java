@@ -4,6 +4,7 @@ import com.efrei.demospring.entity.Maison;
 import com.efrei.demospring.entity.Personne;
 import com.efrei.demospring.oldway.repo.MaisonOldRepo;
 import com.efrei.demospring.oldway.repo.PersonneOldRepo;
+import org.h2.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,19 +30,11 @@ public class AssuranceServiceOldImpl implements AssuranceServiceOld {
     }
 
     @Override
-    public Personne addPersonToHouse(int maisonID, int personneID) throws SQLException {
+    public String addPersonToHouse(int maisonID, int personneID) throws SQLException {
 
-        Personne personne = getPersonneByID(personneID) ;
+        maisonOldRepo.setMaisonDePersonne(maisonID, personneID) ;
 
-        if(personne == null) throw new SQLException("Personne not found") ;
-
-        Maison maison = getHouseById(maisonID) ;
-
-        if(maison == null) throw new SQLException("Maison not found") ;
-
-        personne.setMaisonId(maisonID);
-
-        return null;
+        return "OK";
     }
 
     @Override

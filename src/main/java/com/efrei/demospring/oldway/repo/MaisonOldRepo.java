@@ -10,7 +10,12 @@ import java.sql.*;
 @Repository
 public class MaisonOldRepo {
 
-    String insertMaison = "INSERT INTO maisonOld (nomRue, numRue) VALUES (?, ?)";
+    String insertMaison = "INSERT INTO maison (nomRue, numRue) VALUES (?, ?)";
+    // Ok mais ne retourne pas les habitants
+    // String getMaisonByID = "SELECT * FROM maison WHERE id = ?";
+    String getMaisonByID = "SELECT * FROM maison LEFT JOIN personne ON personne.maison_id = maison.id WHERE maison.id = ?";
+
+    String setMaisonForPersonne = "UPDATE Personne SET maison_id = ? WHERE id = ?" ;
 
     public Maison createHouse(Maison maisonOld) {
         Connection conn = null;
@@ -46,12 +51,15 @@ public class MaisonOldRepo {
         try {
             conn = DatabaseUtil.getDatabaseConnection();
 
-            String sql = "SELECT * FROM maison WHERE id = ?";
-            pstmt = conn.prepareStatement(sql);
+
+            pstmt = conn.prepareStatement(getMaisonByID, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             pstmt.setLong(1, id);
 
             rs = pstmt.executeQuery();
             MaisonOldRowMapper mapper = new MaisonOldRowMapper();
+
+            DatabaseUtil.printRaw(rs);
+
             rs.next();
             maisonOld = mapper.mapRow(rs, 0);
         } catch (SQLException e) {
@@ -59,6 +67,26 @@ public class MaisonOldRepo {
         }
 
         return maisonOld;
+    }
+
+
+    public void setMaisonDePersonne(int newMaisonId, int personneId) {
+
+        try (Connection conn = DatabaseUtil.getDatabaseConnection();
+             PreparedStatement pstmt = conn.prepareStatement(setMaisonForPersonne)) {
+
+            pstmt.setInt(1, newMaisonId);
+            pstmt.setInt(2, personneId);
+
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows > 0) {
+                System.out.println("Update successful");
+            } else {
+                System.out.println("Update failed: Personne not found");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

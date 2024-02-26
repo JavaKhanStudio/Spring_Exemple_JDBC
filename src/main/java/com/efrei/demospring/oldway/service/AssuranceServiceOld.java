@@ -11,7 +11,7 @@ public interface AssuranceServiceOld {
     Maison createHouse(Maison MaisonOld) ;
     Maison getHouseById(int id) ;
 
-    Personne addPersonToHouse(int maisonID, int personneID) throws SQLException ;
+    String addPersonToHouse(int maisonID, int personneID) throws SQLException ;
 
     Personne createPersonne(Personne MaisonOld) throws SQLException;
     Personne getPersonneByID(int id) throws SQLException;

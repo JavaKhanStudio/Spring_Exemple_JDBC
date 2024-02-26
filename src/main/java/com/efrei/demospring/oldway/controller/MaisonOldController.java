@@ -28,7 +28,7 @@ public class MaisonOldController {
         }
     }
 
-    @PostMapping(path = "/{id}")
+    @GetMapping(path = "/{maisonId}")
     public ResponseEntity<Maison> getMaison(@PathVariable int maisonId){
 
         Maison maison = assuranceServiceOld.getHouseById(maisonId) ;
@@ -39,12 +39,12 @@ public class MaisonOldController {
         }
     }
 
-    @GetMapping(path = "/{maisonId}/{personneID}")
-    public ResponseEntity<Personne> getPersonne(@PathVariable int maisonId, @PathVariable int personneID) {
+    @PostMapping(path = "/{maisonId}/{personneID}")
+    public ResponseEntity setHouseForPersonne(@PathVariable int maisonId, @PathVariable int personneID) {
         try {
-            Personne personne = assuranceServiceOld.addPersonToHouse(maisonId, personneID) ;
-            if(personne != null) {
-                return ResponseEntity.ok(personne);
+            String reponse = assuranceServiceOld.addPersonToHouse(maisonId, personneID) ;
+            if(reponse != null) {
+                return ResponseEntity.ok(reponse);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null) ;
             }
