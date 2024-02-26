@@ -1,5 +1,6 @@
-package com.efrei.demospring.newway.controller;
+package com.efrei.demospring.newway.repo.controller;
 
+import com.efrei.demospring.dto.ResponseMessage;
 import com.efrei.demospring.entity.Maison;
 import com.efrei.demospring.newway.service.AssuranceServiceNew;
 import org.springframework.http.HttpStatus;
@@ -21,8 +22,10 @@ public class MaisonNewController {
     @PostMapping
     public ResponseEntity addMaison(@RequestBody Maison maison){
         try {
-            assuranceServiceNew.createHouse(maison) ;
-            return ResponseEntity.status(HttpStatus.CREATED).build();
+            Number id = assuranceServiceNew.createHouse(maison) ;
+            // You would not the send ID to the client, this is for education.
+            ResponseMessage responseBody = new ResponseMessage("The ID of the inserted Object is : " + id);
+            return ResponseEntity.status(HttpStatus.CREATED).body(responseBody);
         } catch (Exception e) {
             ErrorResponse errorResponse = new ErrorResponseException(HttpStatus.BAD_REQUEST, e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);

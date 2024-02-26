@@ -1,4 +1,4 @@
-package com.efrei.demospring.newway.controller;
+package com.efrei.demospring.newway.repo.controller;
 
 import com.efrei.demospring.entity.Personne;
 import com.efrei.demospring.newway.service.AssuranceServiceNew;

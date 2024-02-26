@@ -51,7 +51,6 @@ public class MaisonOldRepo {
         try {
             conn = DatabaseUtil.getDatabaseConnection();
 
-
             pstmt = conn.prepareStatement(getMaisonByID, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             pstmt.setLong(1, id);
 

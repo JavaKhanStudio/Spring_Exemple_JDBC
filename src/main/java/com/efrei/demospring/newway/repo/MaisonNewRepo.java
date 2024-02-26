@@ -2,6 +2,8 @@ package com.efrei.demospring.newway.repo;
 
 import com.efrei.demospring.entity.Maison;
 import org.springframework.jdbc.core.simple.JdbcClient;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -18,13 +20,18 @@ public class MaisonNewRepo {
     }
 
 
-    public Maison createHouse(Maison maison) {
-        long generatedId = jdbcClient.sql(addMaison)
+    public Number createHouse(Maison maison) {
+        // Me permet de voir l'id genere pour ma maison
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        long linesUpdated = jdbcClient.
+                sql(addMaison)
                 .param(1, maison.getNomRue())
                 .param(2, maison.getNumRue())
-                .update() ;
+                .update(keyHolder) ;
 
-        return maison;
+
+
+        return keyHolder.getKey() ;
     }
 
     public Maison getHouseById(int id) {

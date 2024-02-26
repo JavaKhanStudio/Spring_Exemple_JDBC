@@ -4,8 +4,6 @@ import com.efrei.demospring.entity.Maison;
 import com.efrei.demospring.entity.Personne;
 import com.efrei.demospring.newway.repo.MaisonNewRepo;
 import com.efrei.demospring.newway.repo.PersonneNewRepo;
-import com.efrei.demospring.oldway.repo.MaisonOldRepo;
-import com.efrei.demospring.oldway.repo.PersonneOldRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +18,7 @@ public class AssuranceServiceNew {
     @Autowired
     MaisonNewRepo maisonNewRepo;
 
-    public Maison createHouse(Maison maisonOld) {
+    public Number createHouse(Maison maisonOld) {
         return maisonNewRepo.createHouse(maisonOld);
     }
 
