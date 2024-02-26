@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "c9d1e4e1-232c-4cae-bf8a-2d7c70074802",
+		"name": "Spring_Exemple_JDBC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7216865"
+	},
+	"item": [
+		{
+			"name": "Add Personne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nom\" : \"Simon\",\r\n    \"genre\" : \"HOMME\",\r\n    \"age\" : 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/personne/old",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"personne",
+						"old"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Personne",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/personne/old/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"personne",
+						"old",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Maison",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/maison",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"maison"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
