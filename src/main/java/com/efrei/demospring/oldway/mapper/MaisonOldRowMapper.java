@@ -22,12 +22,22 @@ public class MaisonOldRowMapper implements RowMapper<Maison> {
         maison.setNomRue(rs.getString("maison.nomRue"));
         maison.setNumRue(rs.getInt("maison.numRue"));
 
+        // Do null check
+
         List<Personne> occupants = new ArrayList<>();
         do  {
+            Integer personneID = rs.getInt("personne.id") ;
+            if(personneID == null)
+                break ;
+
             Personne personne = new Personne();
-            personne.setId(rs.getInt("personne.id")); // Assuming "personne_id" is the column name in the result set
+            personne.setId(personneID); // Assuming "personne_id" is the column name in the result set
             personne.setNom(rs.getString("personne.nom"));
-            personne.setGenre(GenreEnum.valueOf(rs.getString("personne.genre")));
+            String genre = rs.getString("personne.genre") ;
+            System.out.println(genre);
+            if(genre != null)
+                personne.setGenre(GenreEnum.valueOf(genre));
+
             personne.setAge(rs.getInt("personne.age"));
             personne.setMaisonId(rs.getInt("personne.maison_id"));
 

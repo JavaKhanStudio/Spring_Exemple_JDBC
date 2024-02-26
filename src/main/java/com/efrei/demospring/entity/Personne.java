@@ -12,9 +12,9 @@ import lombok.*;
 @Builder
 public class Personne {
 
-    int id ;
+    Integer id ;
     String nom ;
     GenreEnum genre ;
-    int age ;
-    int maisonId;
+    Integer age ;
+    Integer maisonId;
 }

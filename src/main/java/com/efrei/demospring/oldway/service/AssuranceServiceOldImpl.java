@@ -4,7 +4,6 @@ import com.efrei.demospring.entity.Maison;
 import com.efrei.demospring.entity.Personne;
 import com.efrei.demospring.oldway.repo.MaisonOldRepo;
 import com.efrei.demospring.oldway.repo.PersonneOldRepo;
-import org.h2.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
